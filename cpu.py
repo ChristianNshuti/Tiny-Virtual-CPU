@@ -16,4 +16,10 @@ class TinyCPU:
         self.memory = program
         self.pc = 0
         self.running = True
-        
+
+    def run(self):
+        while self.running:
+
+            instruction = self.memory[self.pc]
+            parts = instruction.split()
+            self.pc += 1
