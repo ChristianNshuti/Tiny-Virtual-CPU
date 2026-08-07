@@ -20,6 +20,18 @@ class TinyCPU:
     def run(self):
         while self.running:
 
+            # Fetch
             instruction = self.memory[self.pc]
+
+            # Decode
             parts = instruction.split()
+
+            # Execution comes next
+            opcode = parts[0]
+            if opcode == "LOAD":
+                register = parts[1]
+                value = int(parts[2])
+                self.registers[register] = value
+
+            #Move to next instruction
             self.pc += 1
