@@ -18,7 +18,7 @@ class TinyCPU:
         self.running = True
 
     def run(self):
-        while self.running:
+        while self.running and self.pc < len(self.memory) :
 
             # Fetch
             instruction = self.memory[self.pc]
@@ -32,6 +32,24 @@ class TinyCPU:
                 register = parts[1]
                 value = int(parts[2])
                 self.registers[register] = value
+
+            elif opcode == "ADD":
+                register1 = parts[1]
+                register2 = parts[2]
+                self.registers[register1] += self.registers[register2]
+
+            elif opcode == "SUB":
+                register1 = parts[1]
+                register2 = parts[2]
+                self.registers[register1] -= self.registers[register2]
+
+            elif opcode == "PRINT":
+                register = parts[1]
+                value = self.registers[register]
+                print(value)
+
+            elif opcode == "HALT":
+                self.running = False
 
             #Move to next instruction
             self.pc += 1
