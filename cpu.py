@@ -10,6 +10,11 @@ class TinyCPU:
         self.memory = []
         self.pc = 0
         self.running = True
+        self.flags = {
+            "LESS": False,
+            "ZERO": False,
+            "GREATER": False
+        }
 
 
     def load_program(self,program):
@@ -51,6 +56,28 @@ class TinyCPU:
                 register = parts[1]
                 value = self.registers[register]
                 print(value)
+
+            elif opcode == "CMP":
+                reg1 = parts[1]
+                reg2 = parts[2]
+                register1 = self.registers[reg1]
+                register2 = self.register[reg2]
+
+
+                if register1 < register2:
+                    self.flags["LESS"] = True
+                    self.flags["ZERO"] = False
+                    self.flags["GREATER"] = False
+
+                elif register1 == register2:
+                    self.flags["LESS"] = False
+                    self.flags["ZERO"] = True
+                    self.flags["GREATER"] = False
+
+                elif register1 > register2:
+                    self.flags["LESS"] = False
+                    self.flags["ZERO"] = False
+                    self.flags["GREATER"] = True
 
             elif opcode == "HALT":
                 self.running = False
