@@ -39,9 +39,13 @@ class TinyCPU:
                 self.registers[register1] += self.registers[register2]
 
             elif opcode == "SUB":
-                register1 = parts[1]
+                register1 = parts[1] 
                 register2 = parts[2]
                 self.registers[register1] -= self.registers[register2]
+
+            elif opcode == "JUMP":
+                self.pc = int(parts[1])
+                continue
 
             elif opcode == "PRINT":
                 register = parts[1]
@@ -50,6 +54,7 @@ class TinyCPU:
 
             elif opcode == "HALT":
                 self.running = False
+
 
             #Move to next instruction
             self.pc += 1
