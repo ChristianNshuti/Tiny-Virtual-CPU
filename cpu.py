@@ -61,22 +61,19 @@ class TinyCPU:
                 reg1 = parts[1]
                 reg2 = parts[2]
                 register1 = self.registers[reg1]
-                register2 = self.register[reg2]
+                register2 = self.registers[reg2]
 
+                self.flags["LESS"] = False
+                self.flags["ZERO"] = False
+                self.flags["GREATER"] = False
 
                 if register1 < register2:
                     self.flags["LESS"] = True
-                    self.flags["ZERO"] = False
-                    self.flags["GREATER"] = False
 
                 elif register1 == register2:
-                    self.flags["LESS"] = False
                     self.flags["ZERO"] = True
-                    self.flags["GREATER"] = False
 
                 elif register1 > register2:
-                    self.flags["LESS"] = False
-                    self.flags["ZERO"] = False
                     self.flags["GREATER"] = True
 
             elif opcode == "HALT":
