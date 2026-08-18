@@ -52,6 +52,11 @@ class TinyCPU:
                 self.pc = int(parts[1])
                 continue
 
+            elif opcode == "JUMP_IF_LESS":
+                if self.flags["LESS"]:
+                    self.pc = int(parts[1])
+                    continue
+
             elif opcode == "PRINT":
                 register = parts[1]
                 value = self.registers[register]

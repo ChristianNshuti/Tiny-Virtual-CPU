@@ -3,11 +3,14 @@ from cpu import TinyCPU
 cpu = TinyCPU()
 
 program = [
-    "LOAD R1 10",
-    "LOAD R2 0",
-    "ADD R2 R1",
-    "PRINT R2", 
-    "JUMP 2"
+    "LOAD R1 5",
+    "LOAD R2 10",
+    "CMP R1 R2",
+    "JUMP_IF_LESS 6",
+    "PRINT R1",
+    "HALT",
+    "PRINT R2",
+    "HALT"
 ]
 
 cpu.load_program(program)
