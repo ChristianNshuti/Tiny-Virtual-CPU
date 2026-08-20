@@ -7,12 +7,11 @@ program = [
     "LOAD R2 5",
     "LOAD R3 1",
     "CMP R1 R2",
-    "JUMP_IF_LESS 5",
-    "JUMP_IF_ZERO 9",
+    "JUMP_IF_LESS 6",
+    "HALT",
     "PRINT R1",
     "ADD R1 R3",
-    "JUMP 3",        
-    "HALT"     
+    "JUMP 3" 
 ]
 
 cpu.load_program(program)
