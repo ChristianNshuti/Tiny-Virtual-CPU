@@ -29,7 +29,9 @@ class TinyCPU:
             # Decode
             parts = self.decode(instruction)
             # Execution comes next
-            self.execute(parts)
+            jumped = self.execute(parts)
+            if not jumped:
+                self.pc += 1
 
 
     def fetch(self):
@@ -57,27 +59,27 @@ class TinyCPU:
 
         elif opcode == "JUMP":
             self.pc = int(parts[1])
-            return
+            return True
 
         elif opcode == "JUMP_IF_LESS":
             if self.flags["LESS"]:
                 self.pc = int(parts[1])
-                return
+                return True
 
         elif opcode == "JUMP_IF_ZERO":
             if self.flags["ZERO"]:
                 self.pc = int(parts[1])
-                return
+                return True
 
         elif opcode == "JUMP_IF_GREATER":
             if self.flags["GREATER"]:
                 self.pc = int(parts[1])
-                return
+                return True
 
         elif opcode == "PRINT":
             register = parts[1]
             value = self.registers[register]
-            print(value)
+            print(value) 
 
         elif opcode == "CMP":
             reg1 = parts[1]
@@ -101,6 +103,6 @@ class TinyCPU:
         elif opcode == "HALT":
             self.running = False
 
-        #Move to next instruction
-        self.pc += 1
+        return False
+
      
