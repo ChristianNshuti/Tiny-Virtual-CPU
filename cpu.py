@@ -26,10 +26,10 @@ class TinyCPU:
         while self.running and self.pc < len(self.memory) :
 
             # Fetch
-            instruction = self.memory[self.pc]
+            instruction = self.fetch()
 
             # Decode
-            parts = instruction.split()
+            parts = self.decode(instruction)
 
             # Execution comes next
             opcode = parts[0]
@@ -72,6 +72,7 @@ class TinyCPU:
                 value = self.registers[register]
                 print(value)
 
+
             elif opcode == "CMP":
                 reg1 = parts[1]
                 reg2 = parts[2]
@@ -97,3 +98,11 @@ class TinyCPU:
 
             #Move to next instruction
             self.pc += 1
+
+    def fetch(self):
+        return self.memory[self.pc]
+
+    def decode(self, instruction):
+        return instruction.split()
+    
+    
